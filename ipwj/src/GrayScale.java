@@ -37,14 +37,13 @@ public class GrayScale extends JPanel {
 
 	    for (int j = 0; j < width; j++) {
 
-		Color c = new Color(image.getRGB(j, i));
-		
+		Color c = new Color(image.getRGB(j, i));		
 		int red = (int) (c.getRed() * 0.299);
 		int green = (int) (c.getGreen() * 0.587);
 		int blue = (int) (c.getBlue() * 0.114);
-		
-		Color newColor = new Color(red + green + blue, red + green + blue, red + green + blue);
-		image.setRGB(j, i, newColor.getRGB());
+		int rgbTogray=(red + green + blue)/3;
+		Color gray = new Color(rgbTogray,rgbTogray,rgbTogray);
+		image.setRGB(j, i, gray.getRGB());
 	    }
 	}
 	ImageIcon ic = new ImageIcon(image);
@@ -53,6 +52,7 @@ public class GrayScale extends JPanel {
 
     public static void main(String args[]) throws Exception {
 	JFrame frame = new JFrame();
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	JLabel img = new JLabel();
 	GrayScale obj = new GrayScale();
 	img.setIcon(obj.gray());
