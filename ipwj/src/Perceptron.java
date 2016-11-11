@@ -2,7 +2,7 @@
  * @author Tama Asrory Ridhana
  * @serial Jaringan Syaraf Tiruan, metode Perceptron
  * @version 1.0
- * @since [ Hijriyah ] [ ١٤٣٨\سفر\٩ ]
+ * @since  هِجْرَة : ٩ سؤر ١٤٣٨  
  * 
  * @url https://github.com/tamaasrory/image-processing-with-java/blob/master/ipwj/src/Perceptron.java
  */
