@@ -1,10 +1,17 @@
 /**
+ * 
  * @author Tama Asrory Ridhana
  * @serial Jaringan Syaraf Tiruan, metode Perceptron
  * @version 1.0
  * @since  هِجْرَة : ٩ سؤر ١٤٣٨  
  * 
- * @url https://github.com/tamaasrory/image-processing-with-java/blob/master/ipwj/src/Perceptron.java
+ * @url ###https://github.com/tamaasrory/image-processing-with-java/blob/master/ipwj/src/Perceptron.java
+ * 
+ * @see Perceptron#Perceptron
+ * @see Perceptron#initWeight
+ * @see Perceptron#y_in
+ * @see Perceptron#setWeight
+ * @see Perceptron#main
  */
 
 public class Perceptron {
