@@ -2,111 +2,139 @@
  * @author Tama Asrory Ridhana
  * @serial Jaringan Syaraf Tiruan, metode Perceptron
  * @version 1.0
- * @since 9/11/1438 Hijriyah
+ * @since [ Hijriyah ] [ ١٤٣٨\سفر\٩ ]
+ * 
+ * @url https://github.com/tamaasrory/image-processing-with-java/blob/master/ipwj/src/Perceptron.java
  */
 
 public class Perceptron {
-    static int counter=1;
+    
     /**
-     * @param rows
-     * @param cols
-     * @param init
-     * @return
+     * Deskripsi : <p>Digunakan sebagai penghitung</p>
+     * @variable COUNTER
      */
-    static public double[][] initWeight(int rows, int cols, int init) {
-	double initWeight[][] = new double[rows][cols];
-	for (int i = 0; i < rows; i++) {
-	    for (int j = 0; j < cols; j++) {
-		initWeight[i][j] = init;
-		System.out.print("W"+(counter++)+"=" + init + "\t");
+    static int COUNTER = 1;
+
+    /**
+     * Deskripsi : @Method initWeight() <p>digunakan untuk mengatur nilai awal bobot</p>
+     * 
+     * @param ROWS
+     * @param COLS
+     * @param INIT
+     * @return INIT_WEIGHT
+     */
+    static public double[][] initWeight(int ROWS, int COLS, int INIT) {
+	double INIT_WEIGHT[][] = new double[ROWS][COLS];
+	for (int i = 0; i < ROWS; i++) {
+	    for (int j = 0; j < COLS; j++) {
+		INIT_WEIGHT[i][j] = INIT;
+		System.out.print("W" + (COUNTER++) + "=" + INIT + "\t");
 		if (j % 5 == 0) {
 		    System.out.println("");
 		}
 	    }
 	}
-	counter=1;
+	COUNTER = 1;
 	System.out.println("");
-	return initWeight;
+	return INIT_WEIGHT;
     }
 
     /**
-     * @param Wi
-     * @param pattern
-     * @param bias
+     * Deskripsi : @Method y_in() <p>digunakan untuk menghitung nilai Y_in </p>
+     * 
+     * @param WEIGHT
+     * @param PATTERN
+     * @param BIAS
      * @return
      */
-    static public double y_in(double Wi[][], int pattern[][], double bias) {
-	double XiWi[][] = new double[pattern.length][pattern[0].length];
-	double Sigma_XiWi = 0;
-	for (int i = 0; i < XiWi.length; i++) {
-	    for (int j = 0; j < XiWi[0].length; j++) {
-		XiWi[i][j] = pattern[i][j] * Wi[i][j];
-		System.out.print("(" + pattern[i][j] + "x" + Wi[i][j] + ")+");
+    static public double y_in(double WEIGHT[][], int PATTERN[][], double BIAS) {
+	double XiWEIGHT[][] = new double[PATTERN.length][PATTERN[0].length];
+	double Sigma_XiWEIGHT = 0;
+	for (int i = 0; i < XiWEIGHT.length; i++) {
+	    for (int j = 0; j < XiWEIGHT[0].length; j++) {
+		XiWEIGHT[i][j] = PATTERN[i][j] * WEIGHT[i][j];
+		System.out.print("(" + PATTERN[i][j] + "x" + WEIGHT[i][j] + ")+");
 		if (j % 5 == 0) {
 		    System.out.println("");
 		}
-		Sigma_XiWi += XiWi[i][j];
+		Sigma_XiWEIGHT += XiWEIGHT[i][j];
 	    }
 	}
-	// y_in = SIGMA Xi*Wi + bias
-	System.out.println(bias + " = " + (Sigma_XiWi + bias) + "\n");
-	return (Sigma_XiWi + bias);
+	// y_in = SIGMA Xi*WEIGHT + BIAS
+	System.out.println(BIAS + " = " + (Sigma_XiWEIGHT + BIAS) + "\n");
+	return (Sigma_XiWEIGHT + BIAS);
     }
 
     /**
-     *
-     * @param Wi
-     * @param pattern
-     * @param t
+     * Deskripsi : @Method setWeight() <p>digunakan untuk melakukan perubahan bobot</p>
+     * 
+     * @param WEIGHT
+     * @param PATTERN
+     * @param TARGET
      * @return
      */
-    static public double[][] setWeight(double Wi[][], int pattern[][], int t, double alfa) {
-	for (int i = 0; i < Wi.length; i++) {
-	    for (int j = 0; j < Wi[0].length; j++) {
-		// W_i(baru)=W_i(lama)+alfa*X_i*t
-		System.out.print("W"+(counter++)+"(baru) = " + Wi[i][j] + "+" + alfa + "*" + pattern[i][j] + "*" + t + " = ");
-		Wi[i][j] = Wi[i][j] + alfa * pattern[i][j] * t;
-		System.out.println(Wi[i][j]);
+    static public double[][] setWeight(double WEIGHT[][], int PATTERN[][], int TARGET, double ALPHA) {
+	for (int i = 0; i < WEIGHT.length; i++) {
+	    for (int j = 0; j < WEIGHT[0].length; j++) {
+		// W_i(baru)=W_i(lama)+ALPHA*X_i*t
+		System.out.print("W" + (COUNTER++) + "(baru) = " + WEIGHT[i][j] 
+			+ "+" + ALPHA + "*" + PATTERN[i][j] + "*" + TARGET + " = ");
+		WEIGHT[i][j] = WEIGHT[i][j] + ALPHA * PATTERN[i][j] * TARGET;
+		System.out.println(WEIGHT[i][j]);
 	    }
 	}
-	counter=1;
-	return Wi;
+	COUNTER = 1;
+	return WEIGHT;
     }
 
     /**
-     *
-     * @param y_in
-     * @param target
+     * Deskripsi : @Method cekTarget() <p>digunakan untuk menentukan nilai Y dan 
+     * melakukan pemeriksaan apakah sesuai dengan target atau tidak</p>
+     * 
+     * @param Y_in
+     * @param TARGET
      * @return
      */
-    static public boolean cekTarget(double y_in, int target, double teta) {
+    static public boolean cekTarget(double Y_in, int TARGET, double TETA) {
 
-	int y = 0;
+	int Y = 0;
 
-	if (y_in > teta) {
-	    y = 1;
-	} else if (y_in >= teta || y_in <= teta) {
-	    y = 0;
-	} else if (y_in < (-1 * teta)) {
-	    y = -1;
+	if (Y_in > TETA) {
+	    Y = 1;
+	} else if (Y_in >= TETA || Y_in <= TETA) {
+	    Y = 0;
+	} else if (Y_in < (-1 * TETA)) {
+	    Y = -1;
 	}
-	System.out.print("y = " + y + " ==> y" + ((y == target) ? " sama dengan Target" : " Tidak sama dengan Target ") + "(t=" + target + ")" + "\n\n");
-	return (y == target);
+	System.out.print("y = " + Y + " ==> y" + ((Y == TARGET) ? " sama dengan Target" : " Tidak sama dengan Target ") + "(t=" + TARGET + ")" + "\n\n");
+	return (Y == TARGET);
 
     }
 
-    public Perceptron(int epoch, double teta, double alfa, double bias, double Wi[][], int pattern[][][], int t[]) {
-	System.out.println("bias = " + bias);
-	for (int i = 0; i < epoch; i++) {
-	    System.out.println("-------------------------epoch ke-" + (i + 1) + "--------------------------");
-	    for (int j = 0; j < pattern.length; j++) {
+    /**
+     * Deskripsi : @Method constructor Perceptron() <p>digunakan untuk perhitung perceptron</p>
+     * 
+     * @param EPOCH
+     * @param TETA
+     * @param ALPHA
+     * @param BIAS
+     * @param WEIGHT
+     * @param PATTERN
+     * @param TARGET
+     */
+    public Perceptron(int EPOCH, double TETA, double ALPHA, double BIAS,
+	    double WEIGHT[][], int PATTERN[][][], int TARGET[]) {
+	System.out.println("BIAS = " + BIAS);
+	for (int i = 0; i < EPOCH; i++) {
+	    System.out.println("-------------------------EPOCH ke-" + (i + 1) + "--------------------------");
+	    for (int j = 0; j < PATTERN.length; j++) {
 		System.out.println("......................DATA KE-" + (j + 1) + ".....................");
-		if (!cekTarget(y_in(Wi, pattern[j], bias), t[j], teta)) {
+		if (!cekTarget(y_in(WEIGHT, PATTERN[j], BIAS), TARGET[j], TETA)) {
 		    System.out.println("/\\/\\/\\/ melakukan perubahan bobot /\\/\\/\\/");
-		    Wi = setWeight(Wi, pattern[j], t[j], alfa);
-		    System.out.print("b(baru) = " + bias + "+" + alfa + "*" + t[j] + " = ");
-		    bias = bias + alfa * t[j];
-		    System.out.println(bias + "\n");
+		    WEIGHT = setWeight(WEIGHT, PATTERN[j], TARGET[j], ALPHA);
+		    System.out.print("b(baru) = " + BIAS + "+" + ALPHA + "*" + TARGET[j] + " = ");
+		    BIAS = BIAS + ALPHA * TARGET[j];
+		    System.out.println(BIAS + "\n");
 		}
 	    }
 	}
@@ -114,11 +142,11 @@ public class Perceptron {
 
     public static void main(String[] args) {
 
-	double w[][] = initWeight(5, 5, 0);
+	double WEIGHT[][] = initWeight(5, 5, 0);
 
-	int t[] = {1, -1, -1};
+	int TARGET[] = {1, -1, -1};
 
-	int pola[][][] = {
+	int PATTERN[][][] = {
 	    {
 		{-1, 1, 1, 1, -1},
 		{1, 1, -1, 1, 1},
@@ -141,7 +169,10 @@ public class Perceptron {
 		{1, -1, -1, -1, -1}
 	    }
 	};
-
-	Perceptron perceptron = new Perceptron(3, 0.5, 1, 0, w, pola, t);
+	
+	/**
+	 * Contructor Perceptron(EPOCH, TETA, ALPHA, BIAS, W, PATTERN, TARGET);
+	 */
+	Perceptron perceptron = new Perceptron(3, 0.5, 1, 0, WEIGHT, PATTERN, TARGET);
     }
 }
