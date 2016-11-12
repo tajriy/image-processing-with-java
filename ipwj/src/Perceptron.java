@@ -180,6 +180,6 @@ public class Perceptron {
 	/**
 	 * Contructor Perceptron(EPOCH, THRESHOLD, ALPHA, BIAS, BOBOT, PATTERN, TARGET);
 	 */
-	Perceptron perceptron = new Perceptron(4, 0, 1, 0, 0, PATTERN, TARGET);
+	new Perceptron(4, 0, 1, 0, 0, PATTERN, TARGET);
     }
 }
