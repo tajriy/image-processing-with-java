@@ -102,15 +102,15 @@ public class Perceptron {
      * @param TARGET
      * @return
      */
-    static public boolean cekTarget(double Y_in, int TARGET, double TETA) {
+    static public boolean cekTarget(double Y_in, int TARGET, double THRESHOLD) {
 
 	int Y = 0;
 
-	if (Y_in > TETA) {
+	if (Y_in > THRESHOLD) {
 	    Y = 1;
-	} else if (Y_in >= TETA && Y_in <= TETA) {
+	} else if (Y_in >= THRESHOLD && Y_in <= THRESHOLD) {
 	    Y = 0;
-	} else if (Y_in < (-1 * TETA)) {
+	} else if (Y_in < (-1 * THRESHOLD)) {
 	    Y = -1;
 	}
 	System.out.print("y = " + Y + " ==> y" + ((Y == TARGET) ? " sama dengan Target" : " Tidak sama dengan Target ") + "(t=" + TARGET + ")" + "\n\n");
@@ -122,14 +122,14 @@ public class Perceptron {
      * Deskripsi : @Method constructor Perceptron() <p>digunakan untuk perhitung perceptron</p>
      * 
      * @param EPOCH
-     * @param TETA
+     * @param THRESHOLD
      * @param ALPHA
      * @param BIAS
      * @param WEIGHT
      * @param PATTERN
      * @param TARGET
      */
-    public Perceptron(int EPOCH, double TETA, double ALPHA, double BIAS,
+    public Perceptron(int EPOCH, double THRESHOLD, double ALPHA, double BIAS,
 	    double WEIGHT, int PATTERN[][][], int TARGET[]) {
 	System.out.println("BIAS = " + BIAS);
 	double WEIGHTS[][]=initWeight(PATTERN[0].length, PATTERN[0][0].length, WEIGHT);
@@ -137,7 +137,7 @@ public class Perceptron {
 	    System.out.println("-------------------------EPOCH ke-" + (i + 1) + "--------------------------");
 	    for (int j = 0; j < PATTERN.length; j++) {
 		System.out.println("......................DATA KE-" + (j + 1) + ".....................");
-		if (!cekTarget(y_in(WEIGHTS, PATTERN[j], BIAS), TARGET[j], TETA)) {
+		if (!cekTarget(y_in(WEIGHTS, PATTERN[j], BIAS), TARGET[j], THRESHOLD)) {
 		    System.out.println("/\\/\\/\\/ melakukan perubahan bobot /\\/\\/\\/");
 		    WEIGHTS = setWeight(WEIGHTS, PATTERN[j], TARGET[j], ALPHA);
 		    System.out.print("b(baru) = " + BIAS + "+" + ALPHA + "*" + TARGET[j] + " = ");
@@ -151,7 +151,7 @@ public class Perceptron {
     public static void main(String[] args) {
 	
 	// target
-	int TARGET[] = {1, -1, -1}; 
+	int TARGET[] = {-1, 1, -1}; 
 	// pola
 	int PATTERN[][][] = { 
 	    {
@@ -178,8 +178,8 @@ public class Perceptron {
 	};
 	
 	/**
-	 * Contructor Perceptron(EPOCH, TETA, ALPHA, BIAS, BOBOT, PATTERN, TARGET);
+	 * Contructor Perceptron(EPOCH, THRESHOLD, ALPHA, BIAS, BOBOT, PATTERN, TARGET);
 	 */
-	Perceptron perceptron = new Perceptron(3, 0.5, 1, 0, 0, PATTERN, TARGET);
+	Perceptron perceptron = new Perceptron(4, 0, 1, 0, 0, PATTERN, TARGET);
     }
 }

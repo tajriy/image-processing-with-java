@@ -26,18 +26,18 @@ public class PerceptronTesting_FIX {
 		{1,1}
 	    },
 	    {
-		{1,-1}
+		{1,0}
 	    },
 	    {
-		{-1,1}
+		{0,1}
 	    },
 	    {
-		{-1,-1}
+		{0,0}
 	    }
 	};
 	
 	int TARGET[]={1,-1,-1,-1};
 	
-	Perceptron run=new Perceptron(1, 0, 1, 0, 0, INPUTAN, TARGET);
+	Perceptron run=new Perceptron(1, 0.2, 1, 0, 0, INPUTAN, TARGET);
     }
 }
