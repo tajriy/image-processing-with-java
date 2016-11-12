@@ -21,7 +21,7 @@ public class PerceptronTesting_FIX {
 	 * --------------------
 	 * 
 	 */
-	int p[][][]={
+	int INPUTAN[][][]={
 	    {
 		{1,1}
 	    },
@@ -35,8 +35,9 @@ public class PerceptronTesting_FIX {
 		{-1,-1}
 	    }
 	};
-	int t[]={1,-1,-1,-1};
-	double w[][]=Perceptron.initWeight(1,2, 0);
-	Perceptron run=new Perceptron(1, 0, 1, 0, w, p, t);
+	
+	int TARGET[]={1,-1,-1,-1};
+	
+	Perceptron run=new Perceptron(1, 0, 1, 0, 0, INPUTAN, TARGET);
     }
 }

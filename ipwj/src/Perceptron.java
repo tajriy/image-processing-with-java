@@ -30,7 +30,7 @@ public class Perceptron {
      * @param INIT
      * @return INIT_WEIGHT
      */
-    static public double[][] initWeight(int ROWS, int COLS, int INIT) {
+    static public double[][] initWeight(int ROWS, int COLS, double INIT) {
 	double INIT_WEIGHT[][] = new double[ROWS][COLS];
 	for (int i = 0; i < ROWS; i++) {
 	    for (int j = 0; j < COLS; j++) {
@@ -130,15 +130,16 @@ public class Perceptron {
      * @param TARGET
      */
     public Perceptron(int EPOCH, double TETA, double ALPHA, double BIAS,
-	    double WEIGHT[][], int PATTERN[][][], int TARGET[]) {
+	    double WEIGHT, int PATTERN[][][], int TARGET[]) {
 	System.out.println("BIAS = " + BIAS);
+	double WEIGHTS[][]=initWeight(PATTERN[0].length, PATTERN[0][0].length, WEIGHT);
 	for (int i = 0; i < EPOCH; i++) {
 	    System.out.println("-------------------------EPOCH ke-" + (i + 1) + "--------------------------");
 	    for (int j = 0; j < PATTERN.length; j++) {
 		System.out.println("......................DATA KE-" + (j + 1) + ".....................");
-		if (!cekTarget(y_in(WEIGHT, PATTERN[j], BIAS), TARGET[j], TETA)) {
+		if (!cekTarget(y_in(WEIGHTS, PATTERN[j], BIAS), TARGET[j], TETA)) {
 		    System.out.println("/\\/\\/\\/ melakukan perubahan bobot /\\/\\/\\/");
-		    WEIGHT = setWeight(WEIGHT, PATTERN[j], TARGET[j], ALPHA);
+		    WEIGHTS = setWeight(WEIGHTS, PATTERN[j], TARGET[j], ALPHA);
 		    System.out.print("b(baru) = " + BIAS + "+" + ALPHA + "*" + TARGET[j] + " = ");
 		    BIAS = BIAS + ALPHA * TARGET[j];
 		    System.out.println(BIAS + "\n");
@@ -148,10 +149,9 @@ public class Perceptron {
     }
 
     public static void main(String[] args) {
-	// bobot
-	double WEIGHT[][] = initWeight(5, 5, 0); 
+	
 	// target
-	int TARGET[] = {-1, 1, -1}; 
+	int TARGET[] = {1, -1, -1}; 
 	// pola
 	int PATTERN[][][] = { 
 	    {
@@ -178,8 +178,8 @@ public class Perceptron {
 	};
 	
 	/**
-	 * Contructor Perceptron(EPOCH, TETA, ALPHA, BIAS, W, PATTERN, TARGET);
+	 * Contructor Perceptron(EPOCH, TETA, ALPHA, BIAS, BOBOT, PATTERN, TARGET);
 	 */
-	Perceptron perceptron = new Perceptron(3, 0.5, 1, 0, WEIGHT, PATTERN, TARGET);
+	Perceptron perceptron = new Perceptron(3, 0.5, 1, 0, 0, PATTERN, TARGET);
     }
 }
