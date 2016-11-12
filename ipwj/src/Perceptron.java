@@ -108,7 +108,7 @@ public class Perceptron {
 
 	if (Y_in > TETA) {
 	    Y = 1;
-	} else if (Y_in >= TETA || Y_in <= TETA) {
+	} else if (Y_in >= TETA && Y_in <= TETA) {
 	    Y = 0;
 	} else if (Y_in < (-1 * TETA)) {
 	    Y = -1;
