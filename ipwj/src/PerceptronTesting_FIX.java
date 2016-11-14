@@ -9,6 +9,7 @@ public class PerceptronTesting_FIX {
 	 * @alpha = 1 dan,
 	 * @threshold = 0.5
 	 */
+	
 int INPUTAN[][][]={
 	    {
 		{-1,-1,1,1,-1,-1,-1},

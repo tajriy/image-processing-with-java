@@ -32,7 +32,8 @@ public class GrayScale extends JPanel {
 	image = ImageIO.read(input);
 	width = image.getWidth();
 	height = image.getHeight();
-
+	System.out.println("W : "+width+" x"+" H : "+height);
+	
 	for (int i = 0; i < height; i++) {
 
 	    for (int j = 0; j < width; j++) {

@@ -59,16 +59,23 @@ public class Perceptron {
 	double Sigma_XiWEIGHT = 0;
 	for (int i = 0; i < XiWEIGHT.length; i++) {
 	    for (int j = 0; j < XiWEIGHT[0].length; j++) {
+		// RUMUS : Xi*Wi
 		XiWEIGHT[i][j] = PATTERN[i][j] * WEIGHT[i][j];
+		// print
 		System.out.print("(" + PATTERN[i][j] + "x" + WEIGHT[i][j] + ")+");
 		if (j % 5 == 0) {
 		    System.out.println("");
 		}
+		// RUMUS : SIGMA Xi*Wi
 		Sigma_XiWEIGHT += XiWEIGHT[i][j];
 	    }
 	}
-	// y_in = SIGMA Xi*WEIGHT + BIAS
+	// print
 	System.out.println(BIAS + " = " + (Sigma_XiWEIGHT + BIAS) + "\n");
+	/**
+	 * RUMUS :
+	 * y_in = SIGMA Xi*WEIGHT + BIAS
+	 */
 	return (Sigma_XiWEIGHT + BIAS);
     }
 
@@ -83,14 +90,23 @@ public class Perceptron {
     static public double[][] setWeight(double WEIGHT[][], int PATTERN[][], int TARGET, double ALPHA) {
 	for (int i = 0; i < WEIGHT.length; i++) {
 	    for (int j = 0; j < WEIGHT[0].length; j++) {
-		// W_i(baru)=W_i(lama)+ALPHA*X_i*t
 		System.out.print("W" + (COUNTER++) + "(baru) = " + WEIGHT[i][j] 
 			+ "+" + ALPHA + "*" + PATTERN[i][j] + "*" + TARGET + " = ");
+		/**
+		 * RUMUS :
+		 * W_i(baru)=W_i(lama)+ALPHA*X_i*t
+		 */
 		WEIGHT[i][j] = WEIGHT[i][j] + ALPHA * PATTERN[i][j] * TARGET;
+		
 		System.out.println(WEIGHT[i][j]);
 	    }
 	}
+	/**
+	 * Reset COUNTER = 1
+	 */
 	COUNTER = 1;
+	
+	// return weight
 	return WEIGHT;
     }
 
@@ -129,22 +145,45 @@ public class Perceptron {
      * @param PATTERN
      * @param TARGET
      */
-    public Perceptron(int EPOCH, double THRESHOLD, double ALPHA, double BIAS,
+    public Perceptron(int EPOCH, double THRESHOLD, double ALPHA, double BIAS, 
 	    double WEIGHT, int PATTERN[][][], int TARGET[]) {
-	System.out.println("BIAS = " + BIAS);
+	System.out.print("b = " + BIAS+" ");
 	double WEIGHTS[][]=initWeight(PATTERN[0].length, PATTERN[0][0].length, WEIGHT);
 	for (int i = 0; i < EPOCH; i++) {
 	    System.out.println("-------------------------EPOCH ke-" + (i + 1) + "--------------------------");
 	    for (int j = 0; j < PATTERN.length; j++) {
 		System.out.println("......................DATA KE-" + (j + 1) + ".....................");
+		/**
+		 * Memeriksa apakah inputan sesuai dengan target
+		 */
 		if (!cekTarget(y_in(WEIGHTS, PATTERN[j], BIAS), TARGET[j], THRESHOLD)) {
+		    
 		    System.out.println("/\\/\\/\\/ melakukan perubahan bobot /\\/\\/\\/");
+		    /**
+		     * Mengatur bobot 
+		     */
 		    WEIGHTS = setWeight(WEIGHTS, PATTERN[j], TARGET[j], ALPHA);
 		    System.out.print("b(baru) = " + BIAS + "+" + ALPHA + "*" + TARGET[j] + " = ");
+		    /**
+		     * Mengatur bias
+		     */
 		    BIAS = BIAS + ALPHA * TARGET[j];
 		    System.out.println(BIAS + "\n");
+		}else{
+		    /**
+		     * Memeriksa apakah target telah tercapai semua
+		     */
+		    if (COUNTER == TARGET.length) {
+			System.exit(0);
+		    }else{
+			COUNTER++;
+		    }
 		}
 	    }
+	    /**
+	     * Reset Nilai COUNTER = 1;
+	     */
+	    COUNTER=1;
 	}
     }
 
