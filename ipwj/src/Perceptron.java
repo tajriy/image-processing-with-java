@@ -23,7 +23,8 @@ public class Perceptron {
     static int COUNTER = 1;
 
     /**
-     * Deskripsi : @Method initWeight() <p>digunakan untuk mengatur nilai awal bobot</p>
+     * Deskripsi : @Method initWeight() 
+     * <p>digunakan untuk mengatur nilai awal bobot</p>
      * 
      * @param ROWS
      * @param COLS
@@ -87,7 +88,8 @@ public class Perceptron {
      * @param TARGET
      * @return
      */
-    static public double[][] setWeight(double WEIGHT[][], int PATTERN[][], int TARGET, double ALPHA) {
+    static public double[][] setWeight(double WEIGHT[][], int PATTERN[][], 
+	    int TARGET, double ALPHA) {
 	for (int i = 0; i < WEIGHT.length; i++) {
 	    for (int j = 0; j < WEIGHT[0].length; j++) {
 		System.out.print("W" + (COUNTER++) + "(baru) = " + WEIGHT[i][j] 
@@ -135,7 +137,8 @@ public class Perceptron {
     }
 
     /**
-     * Deskripsi : @Method constructor Perceptron() <p>digunakan untuk perhitung perceptron</p>
+     * Deskripsi : @Method constructor Perceptron() 
+     * <p>digunakan untuk perhitung perceptron</p>
      * 
      * @param EPOCH
      * @param THRESHOLD

@@ -1,10 +1,11 @@
+
 /**
  *
  * @author Tama Asrory Ridhana
  * @serial Pengolahan Citra Digital , Gary-Scale
  * @version 1.0
- * @since  هِجْرَة : ٩ سؤر ١٤٣٨  
- * 
+ * @since هِجْرَة : ٩ سؤر ١٤٣٨
+ * @copyright 2016 tama asrory ridhana
  */
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -23,7 +24,7 @@ public class GrayScale extends JPanel {
     int counter = 0;
 
     public ImageIcon gray() throws IOException {
-	File input = new File("/opt/lampp/htdocs/myrepo/java/image-processing-with-java/ipwj/src/tama1.png");
+	File input = new File("/opt/lampp/htdocs/myrepo/java/image-processing-with-java/ipwj/src/lena.jpg");
 	image = ImageIO.read(input);
 	width = image.getWidth();
 	height = image.getHeight();
@@ -50,10 +51,11 @@ public class GrayScale extends JPanel {
     }
 
     public void setColor(int[][] pixel) {
-//	System.out.println("RATA2 = " + (counter / (width * height))); // print average color in integer
+	double avg = (counter / (width * height));
+	System.out.println("RATA2 = " + avg); // print average color in integer
 	for (int i = 0; i < height; i++) {
 	    for (int j = 0; j < width; j++) {
-		if (pixel[i][j] < (counter / (width * height))) {
+		if (pixel[i][j] < avg) {
 		    pixel[i][j] = 0;
 		} else {
 		    pixel[i][j] = 255;
@@ -73,7 +75,7 @@ public class GrayScale extends JPanel {
 	GrayScale obj = new GrayScale();
 	img.setIcon(obj.gray());
 	frame.add(img);
-	frame.setSize(obj.width, obj.height);
+	frame.setSize(240, 240);
 	frame.setLocationRelativeTo(null);
 	frame.setVisible(true);
     }
