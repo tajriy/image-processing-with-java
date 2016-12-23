@@ -62,10 +62,9 @@ public class BackPropagation {
                     {-0.1} // <-- bias selalu di akhir
             };
             this.pelatihan();
-        } catch (Exception e) {
-            e.getLocalizedMessage();
+        } catch (Exception Err) {
+            Err.getLocalizedMessage();
         }
-
     }
 
     public void pelatihan() {
@@ -83,9 +82,11 @@ public class BackPropagation {
         // Hitung keluaran unit tersembunyi z
         this.z_net = new double[this.z];
         this.fz_net = new double[this.z];
+        // loop :
         for (int i = 0; i < this.z_net.length; i++) {
             // formula :
             this.z_net[i] = this.weightInputToHidden[this.weightInputToHidden.length - 1][i];
+            // loop :
             for (int j = 0; j < this.x.length; j++) {
                 // formula :
                 this.z_net[i] += this.x[j] * this.weightInputToHidden[j][i];
@@ -105,12 +106,14 @@ public class BackPropagation {
         // Hitung keluaran unit y
         this.y_net = new double[this.y];
         this.fy_net = new double[this.y];
+        // loop :
         for (int i = 0; i < this.y_net.length; i++) {
             // formula :
             this.y_net[i] = this.weightHiddenToOutput[this.weightHiddenToOutput.length - 1][i];
             //print
             System.out.print("y_net " + (i + 1) + " = "
                     + this.weightHiddenToOutput[this.weightHiddenToOutput.length - 1][i]);
+            // loop :
             for (int j = 0; j < this.fz_net.length; j++) {
                 //print
                 System.out.print(" + (" + this.fz_net[j] + " * " + this.weightHiddenToOutput[j][i] + ")");
@@ -134,13 +137,14 @@ public class BackPropagation {
     public void backWard() {
         // Hitung faktor δ di unit keluaran Yk
         this.faktor_δ = new double[this.y];
+        // loop :
         for (int i = 0; i < this.faktor_δ.length; i++) {
             // formula : δ k = ( t k − y k ) f ' ( y _ net k ) = ( t k − y k ) y k ( 1 − y k )
             this.faktor_δ[i] = (this.t[i] - this.fy_net[i]) * (this.fy_net[i]) * (1 - this.fy_net[i]);
             // print
             System.out.println("faktor_δ = (" + this.t[i] + " - " + this.fy_net[i] + ") * (" + this.fy_net[i]
                     + ") * (" + 1 + "-" + this.fy_net[i] + ") = " + this.faktor_δ[i]);
-
+            // loop :
             for (int j = 0; j < this.weightHiddenToOutput.length; j++) {
                 // formula :
                 this.uWeightHiddenToOutput[j][i] = this.learningRate * this.faktor_δ[i]
@@ -154,8 +158,11 @@ public class BackPropagation {
         // Hitung penjumlahan kesalahan dari unit tersembunyi δ
         this.δ_net = new double[this.weightHiddenToOutput.length - 1];
         this.fδ_net = new double[this.δ_net.length];
+        // loop :
         for (int i = 0; i < this.δ_net.length; i++) {
+            // loop :
             for (int j = 0; j < this.faktor_δ.length; j++) {
+                // formula :
                 this.δ_net[i] += this.faktor_δ[j] * this.weightHiddenToOutput[i][j];
             }
             // print
@@ -167,7 +174,9 @@ public class BackPropagation {
                     + this.fz_net[i] + " * " + "(1 - " + this.fz_net[i] + ") = " + this.fδ_net[i]);
         }
         // Suku perubahan bobot ke unit tersembunyi :
+        // loop :
         for (int i = 0; i < this.weightInputToHidden.length; i++) {
+            // loop :
             for (int j = 0; j < this.weightInputToHidden[0].length; j++) {
                 // formula : Δv ji = α δj xi
                 this.uWeightInputToHidden[i][j] = this.learningRate * this.fδ_net[j] * ((i < this.x.length)
@@ -180,16 +189,12 @@ public class BackPropagation {
     }
 
     /**
-     * <b>Langkah 8 Tahap III : Pengupdatean Bobot dan Bias.</b><br/>Masing-masing unit output/keluaran
-     * (y<sub>j</sub>, k=1,2,3,...,m) dilakukan pengupdatean bias dan bobotnya (j = 0,1,2,...,p) sehingga
-     * menghasilkan bobot dan bias baru :
-     * <blockquote>W<sub>kj</sub>(baru) = W<sub>kj</sub>(lama) + ∆W<sub>kj</sub></blockquote>
-     * Demikian juga untuk setiap unit tersembunyi mulai dari unit ke-1 sampai dengan unit ke-p dilakukan
-     * pengupdatean bobot dan bias :
-     * <blockquote>V<sub>ji</sub>(baru) = V<sub>ji</sub>(lama) + ∆V<sub>ji</sub></blockquote>
+     *
      */
     public void updateWeight(double dbBaru[][], double dbLama[][]) {
+        // loop :
         for (int i = 0; i < dbBaru.length; i++) {
+            // loop :
             for (int j = 0; j < dbBaru[0].length; j++) {
                 // print
                 System.out.print("W " + i + j + " = " + dbLama[i][j] + " + " + dbBaru[i][j] + " = ");
@@ -202,12 +207,19 @@ public class BackPropagation {
     }
 
     public static void main(String[] args) {
+        // instance class :
         BackPropagation bp = new BackPropagation();
+        // neuron input
         bp.x = new double[]{1.0, 1.0};
+        // neuron hidden
         bp.z = 3;
+        // neuron output
         bp.y = 1;
+        // learning rate
         bp.learningRate = 0.2;
+        // target
         bp.t = new double[]{0};
+        // init
         bp.init();
     }
 }
